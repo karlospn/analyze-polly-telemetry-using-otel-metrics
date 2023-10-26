@@ -1,0 +1,52 @@
+version: '3.8'
+
+networks:
+  polly:
+    name: polly-network
+
+services:
+  prometheus:
+    build: 
+      context: ./scripts/prometheus
+    ports:
+      - 9090:9090
+    networks:
+      - polly
+
+  grafana:
+    build: 
+      context: ./scripts/grafana
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    networks:
+      - polly
+  
+  otel-collector:
+    image: otel/opentelemetry-collector:0.73.0
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./scripts/otel-collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml
+    ports:
+      - "8888:8888" 
+      - "8889:8889" 
+      - "13133:13133"
+      - "4317:4317"
+    networks:
+      - polly
+
+  app:
+    build:
+      context: ./src/PollyTelemetryDemo.WebApi
+    depends_on:
+      - otel-collector
+    ports:
+      - 5001:8080
+    environment:
+    ## There is a typo in the 'TypiCodeBaseUri' variable. This is done on purpose to force the Polly strategies to be executed.
+    ## You can fix the typo and run it, but you won't see the Polly metrics associated when something goes wrong.
+      TypiCodeBaseUri: https://jsonplceholder.typicode.com/
+      OtlpEndpointUri: http://otel-collector:4317
+    networks:
+      - polly
