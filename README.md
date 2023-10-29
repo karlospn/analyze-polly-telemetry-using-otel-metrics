@@ -254,17 +254,17 @@ If you open Grafana after using the .NET WebAPI endpoints a few times, you will 
 
 With this dashboard, we can address questions such as:
 
-- _How many times was the call to "https://jsonplaceholder.typicode.com/posts/{commentId}/comments" retried in the last hour?_
+- _How many calls to the "https://jsonplaceholder.typicode.com/posts/{commentId}/comments" endpoint were retried within the last hour?_
+  
+- _How many calls to the "https://jsonplaceholder.typicode.com/posts/{commentId}/comments" endpoint were successful? And how many were retried?_
 
-- _How many times was the call to "https://jsonplaceholder.typicode.com/posts/{commentId}/comments" successful? and how many times was it retried?_
-
-- _What exceptions were thrown by the call to "https://jsonplaceholder.typicode.com/posts/{commentId}/comments" in each retry?_
+- _What types of exceptions were raised during the calls to "https://jsonplaceholder.typicode.com/posts/{commentId}/comments" in each retry?_
 
 - _What is the average duration of each retry made to "https://jsonplaceholder.typicode.com/posts/{commentId}/comments"?_
 
-- _How many times was the call to "https://jsonplaceholder.typicode.com/users/{userId}" made when the circuit was open? How about when it was half open? And when it was closed?_
+- _How many calls were made to the "https://jsonplaceholder.typicode.com/users/{userId}" endpoint when the circuit was open, half open, and closed, respectively?_
 
-- _What is the average response time of each call made to "https://jsonplaceholder.typicode.com/users/{userId}" when the circuit is open? What about when an error is thrown and the circuit remains closed?_
+- _What is the average response time for each call made to the "https://jsonplaceholder.typicode.com/users/{userId}" endpoint when the circuit is open, and how does it compare to the response time when an error is thrown and the circuit remains closed?_
 
 
 ![polly-metrics-dashboard](https://raw.githubusercontent.com/karlospn/analyze-polly-telemetry-using-otel-metrics/main/docs/polly-metrics-dashboard.png)
