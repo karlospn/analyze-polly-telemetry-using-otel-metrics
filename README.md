@@ -1,4 +1,4 @@
-# Analyze Polly Telemetry using OpenTelemetry Metrics
+# Analyze Polly Telemetry using Prometheus, Grafana and OpenTelemetry Metrics
 
 Starting with version 8, Polly provides Telemetry for all built-in resilience strategies.    
 This repository contains an example of how to send this Telemetry to Prometheus and Grafana for a more in-depth analysis using OpenTelemetry Metrics.
