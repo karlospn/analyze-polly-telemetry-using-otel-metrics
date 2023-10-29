@@ -14,12 +14,12 @@ namespace PollyTelemetryDemo.WebApi.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> Get(int commentId)
+        public async Task<IActionResult> Get(int commentId, CancellationToken ct)
         {
             var client = _httpClientFactory.CreateClient("typicode-comments");
             
             var response = await client.GetAsync(
-                $"posts/{commentId}/comments");
+                $"posts/{commentId}/comments", ct);
 
             if (response.IsSuccessStatusCode)
                 return Ok(await response.Content.ReadAsStringAsync());

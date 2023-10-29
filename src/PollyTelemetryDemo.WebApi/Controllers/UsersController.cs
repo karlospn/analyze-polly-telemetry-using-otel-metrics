@@ -13,12 +13,12 @@ namespace PollyTelemetryDemo.WebApi.Controllers
         }
 
         [HttpGet()]
-        public async Task<IActionResult> Get(int userId)
+        public async Task<IActionResult> Get(int userId, CancellationToken ct)
         {
             var client = _httpClientFactory.CreateClient("typicode-users");
             
             var response = await client.GetAsync(
-                $"users/{userId}");
+                $"users/{userId}", ct);
 
             if (response.IsSuccessStatusCode)
                 return Ok(await response.Content.ReadAsStringAsync());
