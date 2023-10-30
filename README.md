@@ -10,9 +10,11 @@ This repository contains the following applications:
 ![polly-metrics-components-diagram](https://raw.githubusercontent.com/karlospn/analyze-polly-telemetry-using-otel-metrics/main/docs/polly-metrics-components-diagram.png)
 
 - A .NET WebAPI that uses Polly to improve resiliency when making HTTP calls to the ``https://jsonplaceholder.typicode.com/`` API.
+    - Polly provides Telemetry for all built-in resilience strategies starting with version 8. It’s crucial to emphasize that the .NET WebApi does not work with versions of Polly earlier than version 8. 
 - The WebApi uses the OpenTelemetry OTLP exporter package (``OpenTelemetry.Exporter.OpenTelemetryProtocol``) to send the Polly Telemetry to an OpenTelemetry Collector.
 - A Prometheus server that fetches the Polly metric data from the OTEL Collector.
 - A Grafana server that is preconfigured with a dashboard for visualizing the Polly metrics sent by the WebAPI.
+
 
 # **Application**
 
